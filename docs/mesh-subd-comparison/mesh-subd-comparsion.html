@@ -70,15 +70,14 @@
 <div class="figure align-default">
 <img alt="../_images/mesh-subd-comparison.png" class="figure-img img-fluid" src="../_images/mesh-subd-comparison.png" />
 </div>
-<p>Side-by-side comparison of various mesh subdivision algoruthms in COMPAS.</p>
+<p>Side-by-side comparison of various mesh subdivision algorithms in COMPAS.</p>
 <ul class="simple">
-<li><p>Environment: Viewer (PySide2 + PyOpengGL)</p></li>
+<li><p>Environment: Viewer</p></li>
 <li><p>COMPAS version: 0.13.0</p></li>
 <li><p>Other requirements: <code class="xref py py-mod docutils literal notranslate"><span class="pre">compas_viewers</span></code></p></li>
 </ul>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
-<span class="kn">import</span> <span class="nn">compas</span>
 <span class="kn">from</span> <span class="nn">compas.datastructures</span> <span class="kn">import</span> <span class="n">Mesh</span>
 <span class="kn">from</span> <span class="nn">compas.datastructures</span> <span class="kn">import</span> <span class="n">mesh_quads_to_triangles</span>
 <span class="kn">from</span> <span class="nn">compas.datastructures</span> <span class="kn">import</span> <span class="n">mesh_subdivide</span>
@@ -87,24 +86,23 @@
 <span class="kn">from</span> <span class="nn">compas.datastructures</span> <span class="kn">import</span> <span class="n">mesh_transform</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Box</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Translation</span>
-
-<span class="kn">from</span> <span class="nn">compas_plotters</span> <span class="kn">import</span> <span class="n">MeshPlotter</span>
 <span class="kn">from</span> <span class="nn">compas_viewers.multimeshviewer</span> <span class="kn">import</span> <span class="n">MultiMeshViewer</span>
-<span class="kn">from</span> <span class="nn">compas.utilities</span> <span class="kn">import</span> <span class="n">print_profile</span>
 
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="o">.</span><span class="n">from_obj</span><span class="p">(</span><span class="n">compas</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;faces.obj&#39;</span><span class="p">))</span>
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="o">.</span><span class="n">from_shape</span><span class="p">(</span><span class="n">Box</span><span class="o">.</span><span class="n">from_corner_corner_height</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">))</span>
+
+<span class="n">tri</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;tri&#39;</span><span class="p">)</span>
+<span class="n">quad</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quad&#39;</span><span class="p">)</span>
+<span class="n">ck</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;catmullclark&#39;</span><span class="p">)</span>
+<span class="n">corner</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">)</span>
+<span class="n">doosabin</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;doosabin&#39;</span><span class="p">)</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">trimesh_subdivide_loop</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="n">mesh_subdivide_frames</span>
+
+
+<span class="n">box</span> <span class="o">=</span> <span class="n">Box</span><span class="o">.</span><span class="n">from_corner_corner_height</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="o">.</span><span class="n">from_shape</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
 
 <span class="n">trimesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">mesh_quads_to_triangles</span><span class="p">(</span><span class="n">trimesh</span><span class="p">)</span>
-
-<span class="n">tri</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;tri&#39;</span><span class="p">))</span>
-<span class="n">quad</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;quad&#39;</span><span class="p">))</span>
-<span class="n">ck</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;catmullclark&#39;</span><span class="p">))</span>
-<span class="n">corner</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">))</span>
-<span class="n">doosabin</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">mesh_subdivide</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;doosabin&#39;</span><span class="p">))</span>
-<span class="n">loop</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">trimesh_subdivide_loop</span><span class="p">)</span>
-<span class="n">frames</span> <span class="o">=</span> <span class="n">print_profile</span><span class="p">(</span><span class="n">mesh_subdivide_frames</span><span class="p">)</span>
 
 <span class="n">tri_mesh</span> <span class="o">=</span> <span class="n">tri</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">quad_mesh</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -120,14 +118,6 @@
 <span class="n">mesh_transform</span><span class="p">(</span><span class="n">ck_mesh</span><span class="p">,</span> <span class="n">Translation</span><span class="p">([</span><span class="mf">1.2</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
 <span class="n">mesh_transform</span><span class="p">(</span><span class="n">doosabin_mesh</span><span class="p">,</span> <span class="n">Translation</span><span class="p">([</span><span class="mf">1.2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
 <span class="n">mesh_transform</span><span class="p">(</span><span class="n">loop_mesh</span><span class="p">,</span> <span class="n">Translation</span><span class="p">([</span><span class="mf">1.2</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">tri_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">quad_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ck_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">corner_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">doosabin_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">loop_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">frames_mesh</span><span class="o">.</span><span class="n">number_of_faces</span><span class="p">())</span>
 
 <span class="n">viewer</span> <span class="o">=</span> <span class="n">MultiMeshViewer</span><span class="p">()</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">meshes</span> <span class="o">=</span> <span class="p">[</span><span class="n">tri_mesh</span><span class="p">,</span> <span class="n">quad_mesh</span><span class="p">,</span> <span class="n">corner_mesh</span><span class="p">,</span> <span class="n">frames_mesh</span><span class="p">,</span> <span class="n">ck_mesh</span><span class="p">,</span> <span class="n">doosabin_mesh</span><span class="p">,</span> <span class="n">loop_mesh</span><span class="p">]</span>

@@ -6,9 +6,9 @@ Comparison of Mesh Subdivision Algorithms
     :figclass: figure
     :class: figure-img img-fluid
 
-Side-by-side comparison of various mesh subdivision algoruthms in COMPAS.
+Side-by-side comparison of various mesh subdivision algorithms in COMPAS.
 
-* Environment: Viewer (PySide2 + PyOpengGL)
+* Environment: Viewer
 * COMPAS version: 0.13.0
 * Other requirements: :mod:`compas_viewers`
 
