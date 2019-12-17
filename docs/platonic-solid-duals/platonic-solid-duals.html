@@ -81,10 +81,6 @@
 <span class="kn">from</span> <span class="nn">compas.datastructures</span> <span class="kn">import</span> <span class="n">mesh_dual</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Translation</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Scale</span>
-<span class="c1"># from compas.geometry import Sphere</span>
-<span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">bounding_box_xy</span>
-<span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">distance_point_point</span>
-<span class="c1"># from compas.geometry import subtract_vectors</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">length_vector</span>
 <span class="kn">from</span> <span class="nn">compas_viewers.multimeshviewer</span> <span class="kn">import</span> <span class="n">MultiMeshViewer</span>
 
@@ -95,19 +91,13 @@
 <span class="n">icosa</span> <span class="o">=</span> <span class="n">Mesh</span><span class="o">.</span><span class="n">from_polyhedron</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="n">meshes</span> <span class="o">=</span> <span class="p">[</span><span class="n">tetra</span><span class="p">,</span> <span class="n">hexa</span><span class="p">,</span> <span class="n">octa</span><span class="p">,</span> <span class="n">dodeca</span><span class="p">,</span> <span class="n">icosa</span><span class="p">]</span>
-<span class="c1"># spheres = []</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes</span><span class="p">):</span>
     <span class="n">radius</span> <span class="o">=</span> <span class="n">length_vector</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">get_vertex_attributes</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">get_any_vertex</span><span class="p">(),</span> <span class="s1">&#39;xyz&#39;</span><span class="p">))</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">radius</span>
-    <span class="n">bbox</span> <span class="o">=</span> <span class="n">bounding_box_xy</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">get_vertices_attributes</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">))</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">distance_point_point</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">Translation</span><span class="p">([</span><span class="mf">2.2</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
     <span class="n">S</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">([</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">])</span>
     <span class="n">mesh_transform</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
     <span class="n">mesh_transform</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-    <span class="c1"># sphere = Mesh.from_shape(Sphere([0.0, 0.0, 0.0], 1.0))</span>
-    <span class="c1"># mesh_transform(sphere, T)</span>
-    <span class="c1"># spheres.append(sphere)</span>
 
 <span class="n">duals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="p">:</span>
