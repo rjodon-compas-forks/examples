@@ -11,3 +11,4 @@ COMPAS Examples
     oabb/**
     pointcloud-alignment/**
     mesh-subd-comparison/**
+    mesh-duals/**

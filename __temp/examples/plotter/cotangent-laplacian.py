@@ -31,9 +31,9 @@ plotter.draw_faces()
 arrows = []
 for start, vector in zip(V, d):
     arrows.append({
-        'start' : start,
-        'end'   : add_vectors(start, vector),
-        'color' : '#ff0000'
+        'start': start,
+        'end': add_vectors(start, vector),
+        'color': '#ff0000'
     })
 
 plotter.draw_arrows(arrows)
