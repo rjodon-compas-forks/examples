@@ -102,9 +102,6 @@
 <span class="n">bbox</span> <span class="o">=</span> <span class="n">bounding_box_xy</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">get_vertices_attributes</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">))</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">distance_point_point</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-<span class="n">trimesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">mesh_quads_to_triangles</span><span class="p">(</span><span class="n">trimesh</span><span class="p">)</span>
-
 <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="n">tri_mesh</span> <span class="o">=</span> <span class="n">tri</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
