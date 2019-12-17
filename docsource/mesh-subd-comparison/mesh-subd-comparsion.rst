@@ -1,6 +1,6 @@
-*****************************************
-Comparison of Mesh Subdivision Algorithms
-*****************************************
+***************************
+Mesh Subdivision Algorithms
+***************************
 
 .. figure:: mesh-subd-comparison.png
     :figclass: figure

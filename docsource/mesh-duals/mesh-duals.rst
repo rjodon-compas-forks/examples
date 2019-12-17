@@ -1,6 +1,6 @@
-************************
-Comparison of Mesh Duals
-************************
+**********
+Mesh Duals
+**********
 
 .. figure:: mesh-duals.png
     :figclass: figure
