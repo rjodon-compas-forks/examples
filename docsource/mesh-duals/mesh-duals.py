@@ -24,9 +24,6 @@ mesh = Mesh.from_shape(box)
 bbox = bounding_box_xy(mesh.get_vertices_attributes('xyz'))
 d = distance_point_point(bbox[0], bbox[1])
 
-trimesh = mesh.copy()
-mesh_quads_to_triangles(trimesh)
-
 k = 2
 
 tri_mesh = tri(mesh, k=k)
