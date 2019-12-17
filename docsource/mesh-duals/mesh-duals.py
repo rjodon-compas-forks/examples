@@ -1,7 +1,6 @@
 from functools import partial
 
 from compas.datastructures import Mesh
-from compas.datastructures import mesh_quads_to_triangles
 from compas.datastructures import mesh_subdivide
 from compas.datastructures import mesh_transform
 from compas.datastructures import mesh_dual
