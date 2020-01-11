@@ -10,3 +10,6 @@ COMPAS Examples
     mesh-dr-gif/**
     oabb/**
     pointcloud-alignment/**
+    mesh-subd-comparison/**
+    mesh-duals/**
+    platonic-solid-duals/**
