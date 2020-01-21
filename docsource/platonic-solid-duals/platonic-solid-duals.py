@@ -14,12 +14,12 @@ icosa = Mesh.from_polyhedron(20)
 
 meshes = [tetra, hexa, octa, dodeca, icosa]
 for i, mesh in enumerate(meshes):
-    radius = length_vector(mesh.get_vertex_attributes(mesh.get_any_vertex(), 'xyz'))
+    radius = length_vector(mesh.vertex_attributes(mesh.get_any_vertex(), 'xyz'))
     scale = 1 / radius
     T = Translation([2.2 * i, 0.0, 0.0])
     S = Scale([scale, scale, scale])
-    mesh_transform(mesh, S)
-    mesh_transform(mesh, T)
+    X = T * S
+    mesh_transform(mesh, X)
 
 duals = []
 for mesh in meshes:

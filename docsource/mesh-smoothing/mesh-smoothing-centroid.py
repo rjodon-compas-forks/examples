@@ -18,7 +18,7 @@ mesh.vertex[key]['x'] += 0.3
 mesh.vertex[key]['y'] += 0.3
 
 
-# mesh_smooth_centroid(mesh, fixed=list(mesh.vertices_on_boundary()))
+mesh_smooth_centroid(mesh, fixed=list(mesh.vertices_on_boundary()))
 
 
 plotter = MeshPlotter(mesh, figsize=(8, 5), tight=True)

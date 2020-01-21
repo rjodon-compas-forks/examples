@@ -22,7 +22,7 @@ trimesh.vertex[key]['y'] += 0.3
 fixed = list(mesh.vertices_on_boundary())
 
 for k in range(10):
-    V = array(trimesh.get_vertices_attributes('xyz'))
+    V = array(trimesh.vertices_attributes('xyz'))
     L = trimesh_cotangent_laplacian_matrix(trimesh)
     d = L.dot(V)
     V = V + d

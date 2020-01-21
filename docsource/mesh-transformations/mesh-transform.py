@@ -10,7 +10,7 @@ from compas_plotters import MeshPlotter
 mesh = Mesh.from_polyhedron(6)
 
 origin = [0.0, 0.0, 0.0]
-corner = mesh.get_vertex_attributes(mesh.get_any_vertex(), 'xyz')
+corner = mesh.vertex_attributes(mesh.get_any_vertex(), 'xyz')
 
 d = distance_point_point_xy(origin, corner)
 
