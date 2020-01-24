@@ -32,16 +32,16 @@ corners = list(mesh.vertices_where({'vertex_degree': 2}))
 
 # get numerical mesh data
 
-vertices = mesh.get_vertices_attributes('xyz')
+vertices = mesh.vertices_attributes('xyz')
 edges = list(mesh.edges())
 fixed = corners
 loads = [[0.0, 0.0, 0.0] for key in vertices]
-qpre = mesh.get_edges_attribute('qpre')
-fpre = mesh.get_edges_attribute('fpre')
-lpre = mesh.get_edges_attribute('lpre')
-linit = mesh.get_edges_attribute('l0')
-E = mesh.get_edges_attribute('E')
-radius = mesh.get_edges_attribute('r')
+qpre = mesh.edges_attribute('qpre')
+fpre = mesh.edges_attribute('fpre')
+lpre = mesh.edges_attribute('lpre')
+linit = mesh.edges_attribute('l0')
+E = mesh.edges_attribute('E')
+radius = mesh.edges_attribute('r')
 
 # make a plotter
 # and draw the initial configuration

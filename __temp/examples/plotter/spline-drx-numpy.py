@@ -62,7 +62,7 @@ def plot_iterations(X, radius=0.005):
 
 # Solver with dynamic visualization
 
-drx_numpy(structure=network,
+drx_numpy(network,
           tol=0.01,
           refresh=10,
           factor=30,

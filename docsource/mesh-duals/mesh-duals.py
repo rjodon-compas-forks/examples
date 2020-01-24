@@ -20,7 +20,7 @@ doosabin = partial(mesh_subdivide, scheme='doosabin')
 box = Box.from_corner_corner_height((0.0, 0.0, 0.0), (1.0, 1.0, 0.0), 1.0)
 mesh = Mesh.from_shape(box)
 
-bbox = bounding_box_xy(mesh.get_vertices_attributes('xyz'))
+bbox = bounding_box_xy(mesh.vertices_attributes('xyz'))
 d = distance_point_point(bbox[0], bbox[1])
 
 k = 2
