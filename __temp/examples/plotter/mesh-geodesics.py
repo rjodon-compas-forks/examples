@@ -15,7 +15,7 @@ from compas_plotters import MeshPlotter
 mesh = Mesh.from_obj(compas.get('faces.obj'))
 mesh_flip_cycles(mesh)
 
-vertices = scale_points(mesh.get_vertices_attributes('xyz'), 10.0)
+vertices = scale_points(mesh.vertices_attributes('xyz'), 10.0)
 
 for key, attr in mesh.vertices(True):
     x, y, z = vertices[key]

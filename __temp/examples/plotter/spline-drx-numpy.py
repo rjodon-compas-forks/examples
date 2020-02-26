@@ -16,15 +16,17 @@ pins = [0, 5, 20, n - 5]
 
 # Network
 
-vertices = [[i, i, 0] for i in list(linspace(0, L0, n))]
-edges    = [[i, i + 1] for i in range(n - 1)]
+nodes = [[i, i, 0] for i in list(linspace(0, L0, n))]
+edges = [[i, i + 1] for i in range(n - 1)]
 
-network = Network.from_vertices_and_edges(vertices=vertices, edges=edges)
-network.update_default_vertex_attributes({'is_fixed': False, 'P': [1, -2, 0], 'EIx': EI, 'EIy': EI})
-network.update_default_edge_attributes({'E': 50, 'A': 1, 'l0': L / n})
-network.set_vertices_attributes(['B', 'is_fixed'], [[0, 0, 0], True], keys=pins)
+network = Network.from_nodes_and_edges(nodes=nodes, edges=edges)
+network.update_default_node_attributes(
+    {'is_fixed': False, 'P': [1, -2, 0], 'EIx': EI, 'EIy': EI, 'B': [1, 1, 1], 'P': [0, 0, 0]})
+network.update_default_edge_attributes(
+    {'E': 50, 'A': 1, 'l0': L / n})
+network.nodes_attribute('B', [0, 0, 0], keys=pins)
+network.nodes_attribute('is_fixed', True, keys=pins)
 network.attributes['beams'] = {'beam': {'nodes': list(range(n))}}
-
 
 # Plotter
 
@@ -36,13 +38,13 @@ plotter = NetworkPlotter(network, figsize=(10, 7))
 lines = []
 for u, v in network.edges():
     lines.append({
-        'start': network.vertex_coordinates(u, 'xy'),
-        'end':   network.vertex_coordinates(v, 'xy'),
+        'start': network.node_coordinates(u, 'xy'),
+        'end':   network.node_coordinates(v, 'xy'),
         'color': '#cccccc',
         'width': 1.0})
 
 plotter.draw_lines(lines)
-plotter.draw_vertices(radius=0.005, facecolor={key: '#ff0000' for key in pins})
+plotter.draw_nodes(radius=0.005, facecolor={key: '#ff0000' for key in pins})
 plotter.draw_edges()
 plotter.update()
 
@@ -51,11 +53,12 @@ plotter.update()
 
 def plot_iterations(X, radius=0.005):
 
-    for i in network.vertices():
-        x, y, z = X[i, :]
-        network.set_vertex_attributes(i, 'xyz', [x, y, z])
+    for i, attr in network.nodes(True):
+        attr['x'] = X[i, 0]
+        attr['y'] = X[i, 1]
+        attr['z'] = X[i, 2]
 
-    plotter.update_vertices(radius)
+    plotter.update_nodes(radius)
     plotter.update_edges()
     plotter.update(pause=0.01)
 
@@ -69,6 +72,9 @@ drx_numpy(network,
           update=True,
           callback=plot_iterations)
 
+plotter.draw_nodes(radius=0.005, facecolor={key: '#ff0000' for key in pins})
+plotter.draw_edges()
+plotter.update()
 
 # Keep the plot alive
 

@@ -15,7 +15,7 @@ network = Network.from_obj(compas.get('grid_irregular.obj'))
 
 # start and end
 
-leaves = list(network.vertices_where({'vertex_degree': 1}))
+leaves = list(network.leaves())
 
 start = end = 0
 while start == end:
@@ -26,7 +26,7 @@ while start == end:
 # add weight to the edges corresponding to their length
 # compute the shortest path
 
-adjacency = {key: network.vertex_neighbors(key) for key in network.vertices()}
+adjacency = {key: network.neighbors(key) for key in network.nodes()}
 
 weight = {(u, v): network.edge_length(u, v) for u, v in network.edges()}
 weight.update({(v, u): weight[(u, v)] for u, v in network.edges()})
@@ -44,7 +44,7 @@ for u, v in pairwise(path):
         u, v = v, u
     edges.append([u, v])
 
-plotter.draw_vertices(
+plotter.draw_nodes(
     text={key: key for key in (start, end)},
     facecolor={key: '#ff0000' for key in (path[0], path[-1])},
     radius=0.15
